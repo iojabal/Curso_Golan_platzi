@@ -1,41 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
-type fig2d interface {
-	area() float64
-}
-
-type cuadrado struct {
-	base float64
-}
-
-type Rectangle struct {
-	base   float64
-	altura float64
-}
-
-func (r Rectangle) area() float64 {
-	return r.altura * r.base
-}
-
-func (c cuadrado) area() float64 {
-	return c.base * c.base
-}
-
-func Calculate(f fig2d) {
-	fmt.Println("el area es: ", f.area())
+func say(text string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Println(text)
 }
 
 func main() {
-	MySquare := cuadrado{base: 10}
-	MyRectangle := Rectangle{base: 2, altura: 4}
+	var wg sync.WaitGroup
+	fmt.Println("hello")
 
-	Calculate(MySquare)
-	Calculate(MyRectangle)
+	wg.Add(1)
+	go say("world", &wg)
 
-	//lista de interfaces
-	myInterface := []interface{}{"hola", 12, 0.123}
-	fmt.Println(myInterface...)
+	wg.Wait()
+	//opcion no recomendable
+
+	go func(text string) {
+		fmt.Println(text)
+	}("adios")
+
+	time.Sleep(time.Second * 1)
 
 }
