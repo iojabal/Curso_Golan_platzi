@@ -8,27 +8,13 @@ type pc struct {
 	brand string
 }
 
-func (myPC pc) ping() {
-	fmt.Println(myPC.brand, "pong")
-}
-
-func (myPc *pc) duplicate_Ram() {
-	myPc.ram = myPc.ram * 2
+func (myPV pc) String() string {
+	return fmt.Sprintf("tengo %d GB Ram, %d de dsico y es %s", myPV.ram, myPV.disk, myPV.brand)
 }
 
 func main() {
-	a := 50
-	b := &a
-
-	fmt.Println(a)
-	fmt.Println(*b)
-	*b = 100
-
 	myPc := pc{ram: 15, disk: 200, brand: "MSI"}
 
 	fmt.Println(myPc)
 
-	myPc.ping()
-	myPc.duplicate_Ram()
-	fmt.Println(myPc)
 }
