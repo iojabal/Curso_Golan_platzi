@@ -2,19 +2,40 @@ package main
 
 import "fmt"
 
-type pc struct {
-	ram   int
-	disk  int
-	brand string
+type fig2d interface {
+	area() float64
 }
 
-func (myPV pc) String() string {
-	return fmt.Sprintf("tengo %d GB Ram, %d de dsico y es %s", myPV.ram, myPV.disk, myPV.brand)
+type cuadrado struct {
+	base float64
+}
+
+type Rectangle struct {
+	base   float64
+	altura float64
+}
+
+func (r Rectangle) area() float64 {
+	return r.altura * r.base
+}
+
+func (c cuadrado) area() float64 {
+	return c.base * c.base
+}
+
+func Calculate(f fig2d) {
+	fmt.Println("el area es: ", f.area())
 }
 
 func main() {
-	myPc := pc{ram: 15, disk: 200, brand: "MSI"}
+	MySquare := cuadrado{base: 10}
+	MyRectangle := Rectangle{base: 2, altura: 4}
 
-	fmt.Println(myPc)
+	Calculate(MySquare)
+	Calculate(MyRectangle)
+
+	//lista de interfaces
+	myInterface := []interface{}{"hola", 12, 0.123}
+	fmt.Println(myInterface...)
 
 }
