@@ -1,22 +1,16 @@
 package main
 
-import "fmt"
-
-type Car struct {
-	brand string
-	year  int
-}
+import (
+	"fmt"
+	"prueba/prueba"
+)
 
 func main() {
-	myCar := Car{
-		brand: "Ford",
-		year:  2020,
-	}
-	fmt.Println(myCar)
 
-	//otra manera
-	otherCar := Car{brand: "Toyota", year: 1190}
-	otherCar.brand = "Honda"
+	var Mycar prueba.CarPublic
+	Mycar.Brand = "ferrar"
+	Mycar.Year = 2000
+	fmt.Println(Mycar)
 
-	fmt.Println(otherCar)
+	prueba.PrintMessage("hola platzi")
 }
