@@ -1,16 +1,34 @@
 package main
 
-import (
-	"fmt"
-	"prueba/prueba"
-)
+import "fmt"
+
+type pc struct {
+	ram   int
+	disk  int
+	brand string
+}
+
+func (myPC pc) ping() {
+	fmt.Println(myPC.brand, "pong")
+}
+
+func (myPc *pc) duplicate_Ram() {
+	myPc.ram = myPc.ram * 2
+}
 
 func main() {
+	a := 50
+	b := &a
 
-	var Mycar prueba.CarPublic
-	Mycar.Brand = "ferrar"
-	Mycar.Year = 2000
-	fmt.Println(Mycar)
+	fmt.Println(a)
+	fmt.Println(*b)
+	*b = 100
 
-	prueba.PrintMessage("hola platzi")
+	myPc := pc{ram: 15, disk: 200, brand: "MSI"}
+
+	fmt.Println(myPc)
+
+	myPc.ping()
+	myPc.duplicate_Ram()
+	fmt.Println(myPc)
 }
